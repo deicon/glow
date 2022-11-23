@@ -8,12 +8,6 @@ import (
 )
 
 // RemoveFrontmatter removes the front matter header of a markdown file.
-func RemoveFrontmatter(content []byte) []byte {
-	if frontmatterBoundaries := detectFrontmatter(content); frontmatterBoundaries[0] == 0 {
-		return content[frontmatterBoundaries[1]:]
-	}
-	return content
-}
 
 var yamlPattern = regexp.MustCompile(`(?m)^---\r?\n(\s*\r?\n)?`)
 

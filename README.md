@@ -1,3 +1,6 @@
+---
+title: Hello World
+---
 # Glow
 
 Render markdown on the CLI, with _pizzazz_!

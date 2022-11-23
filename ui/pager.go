@@ -573,6 +573,12 @@ func renderWithGlamour(m pagerModel, md string) tea.Cmd {
 	}
 }
 
+type Handler struct{}
+
+func (h Handler) HandleFrontmatter(frontmatter map[string]interface{}) {
+	fmt.Printf("Hello Frontmatter %v", frontmatter)
+}
+
 // This is where the magic happens.
 func glamourRender(m pagerModel, markdown string) (string, error) {
 	if !config.GlamourEnabled {
@@ -591,6 +597,7 @@ func glamourRender(m pagerModel, markdown string) (string, error) {
 	r, err := glamour.NewTermRenderer(
 		gs,
 		glamour.WithWordWrap(width),
+		glamour.WithFrontMatterHandler(Handler{}),
 	)
 	if err != nil {
 		return "", err

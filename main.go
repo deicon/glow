@@ -244,13 +244,17 @@ func executeArg(cmd *cobra.Command, arg string, w io.Writer) error {
 	return executeCLI(cmd, src, w)
 }
 
+type Handler struct{}
+
+func (h Handler) HandleFrontmatter(frontmatter map[string]interface{}) {
+	fmt.Printf("Hello Frontmatter %v", frontmatter)
+}
+
 func executeCLI(cmd *cobra.Command, src *source, w io.Writer) error {
 	b, err := io.ReadAll(src.reader)
 	if err != nil {
 		return err
 	}
-
-	b = utils.RemoveFrontmatter(b)
 
 	// render
 	var baseURL string
@@ -272,6 +276,7 @@ func executeCLI(cmd *cobra.Command, src *source, w io.Writer) error {
 		gs,
 		glamour.WithWordWrap(int(width)),
 		glamour.WithBaseURL(baseURL),
+		glamour.WithFrontMatterHandler(Handler{}),
 	)
 	if err != nil {
 		return err
