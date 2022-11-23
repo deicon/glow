@@ -25,4 +25,4 @@ require (
 	golang.org/x/text v0.4.0
 )
 
-replace github.com/charmbracelet/glamour v0.6.0 => github.com/deicon/glamour v0.0.4
+replace github.com/charmbracelet/glamour v0.6.0 => github.com/deicon/glamour v0.0.5
